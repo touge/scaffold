@@ -1,0 +1,22 @@
+{
+    "name": "touge/scaffold",
+    "authors": [
+        {
+            "name": "Nick",
+            "email": "lon.y@qq.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Touge\\Modules\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Touge\\Scaffold\\ModuleServiceProvider"
+            ]
+        }
+    }
+}
