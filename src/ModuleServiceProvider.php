@@ -4,6 +4,7 @@ namespace Touge\Scaffold;
 
 use Illuminate\Support\ServiceProvider;
 use Touge\Scaffold\Services\ClassificationService;
+use Touge\Scaffold\Supports\StructureTree;
 
 class ModuleServiceProvider extends ServiceProvider
 {
@@ -25,6 +26,9 @@ class ModuleServiceProvider extends ServiceProvider
     {
         $this->app->singleton('classification', function () {
             return new ClassificationService();
+        });
+        $this->app->singleton('structure.tree', function () {
+            return new StructureTree();
         });
     }
 }
