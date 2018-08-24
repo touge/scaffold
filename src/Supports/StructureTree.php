@@ -58,13 +58,13 @@ class StructureTree{
      * 结果集
      * @var array
      */
-    protected $result                   = [];
+    protected static  $_result          = [];
 
     /**
      * 层次暂存
      * @var array
      */
-    protected $levels                   = [];
+    protected static $_level            = [];
 
 
     /**
@@ -108,14 +108,14 @@ class StructureTree{
         $options = $this->buildData($params,$options);
 
         $options = $this->core(0,$options,'linear');
+
         $_level = $this->level;
 
         if($_level == 0) return $options;
 
         $_result_array = [];
         foreach($options as $key=>$val){
-            if($val['level'] <= $_level)
-            {
+            if($val['level'] <= $_level) {
                 array_push($_result_array,$val);
             }
         }
@@ -131,11 +131,11 @@ class StructureTree{
      */
     private function core($index,Array $params,$type='linear'){
         $result = [];
-
         foreach($params[$index] as $id=>$item) {
             if($type=='normal'){
-                if(isset($params[$id])) {
-                    $item[$this->expanded_key]= $this->expanded;
+                if(isset($params[$id]))
+                {
+                    $item[$this->expanded_key]= $this->expanded;//self::$config['expanded'];
                     $item[$this->children_key]= $this->core($id,$params,$type);
                 } else {
                     $item[$this->leaf_key]= true;
@@ -143,13 +143,13 @@ class StructureTree{
                 $result[] = $item;
             }else if($type=='linear'){
                 $parent_id = $item[$this->parent_key];
-                $this->levels[$id] = $index==0?0:$this->levels[$parent_id]+1;
-                $item['level'] = $this->levels[$id];
-                $this->result[] = $item;
-                if(isset($data[$id])) {
+                self::$_level[$id] = $index==0 ? 0 : self::$_level[$parent_id]+1;
+                $item['level'] = self::$_level[$id];
+                self::$_result[] = $item;
+                if(isset($params[$id])) {
                     $this->core($id,$params,$type);
                 }
-                $result = $this->result;
+                $result = self::$_result;
             }
         }
         return $result;
@@ -171,3 +171,7 @@ class StructureTree{
         return $result;
     }
 }
+
+
+
+
