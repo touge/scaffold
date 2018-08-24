@@ -73,6 +73,7 @@ class StructureTree{
      * @return array
      */
     public function make(Array $params,$options=array()){
+        if(!$params) return [];
         $options = $this->buildData($params,$options);
         $result = $this->core(0,$options,'normal');
         return $result;
@@ -87,6 +88,7 @@ class StructureTree{
      * @return array
      */
     public function find_parents(Array $params,$son_id){
+        if(!$params) return [];
         static $list;
         foreach($params as $v) {
             if($v[$this->primary_key] == $son_id) {
@@ -105,6 +107,7 @@ class StructureTree{
      * @return array
      */
     public function html_list(Array $params,$options=[]){
+        if(!$params) return [];
         $options = $this->buildData($params,$options);
 
         $options = $this->core(0,$options,'linear');
