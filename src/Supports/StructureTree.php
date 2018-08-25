@@ -103,26 +103,21 @@ class StructureTree{
      * 生成线性一维数据结构, 便于HTML输出, 参数同上
      *
      * @param array $params
-     * @param array $options
+     * @param int $level
      * @return array
      */
-    public function html_list(Array $params,$options=[]){
+    public function html_list(Array $params,$level=-1){
         if(!$params) return [];
-        $options = $this->buildData($params,$options);
-
+        $options = $this->buildData($params);
         $options = $this->core(0,$options,'linear');
+        if($level==-1) return $options;
 
-        $_level = $this->level;
-
-        if($_level == 0) return $options;
-
-        $_result_array = [];
         foreach($options as $key=>$val){
-            if($val['level'] <= $_level) {
-                array_push($_result_array,$val);
+            if($val['level'] > $level){
+                unset($options[$key]);
             }
         }
-        return $_result_array;
+        return $options;
     }
 
     /**
