@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Facade;
  * @method static array make(Array $params,$options=array())
  * @method static array find_parents(Array $params,$son_id)
  * @method static array html_list(Array $params,$level=-1)
+ * @method static StructureTree attribute($name,$value=null)
  */
 class StructureTree extends Facade
 {

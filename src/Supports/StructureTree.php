@@ -81,6 +81,24 @@ class StructureTree{
 
 
     /**
+     * 设定类属性值
+     *
+     * @param array|string $name
+     * @param null|string $value
+     * @return $this
+     */
+    public function attribute($name,$value=null){
+        if(is_array($name)){
+            foreach($name as $k=>$v){
+                $this->$k = $v;
+            }
+            return $this;
+        }
+        $this->$name = $value;
+        return $this;
+    }
+
+    /**
      * 根据子ID，寻找父级集
      *
      * @param $params
